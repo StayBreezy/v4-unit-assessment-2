@@ -30,13 +30,17 @@ let foods = [
 //DO NOT EDIT THE CODE ABOVE
 
 /*
-  Use the .forEach method to modify each food object in the foods array above to include calories. 
-  Calories can be calculated by multiplying carbs by 4, protein by 4, fat by 9, 
-  and then adding the results together. 
+  Use the .forEach method to modify each food object in the foods array above to include calories.
+  Calories can be calculated by multiplying carbs by 4, protein by 4, fat by 9,
+  and then adding the results together.
 */
 
 //CODE HERE
-
+foods.forEach(function (elem, i, arr){
+ elem.calories = (elem.carbs * 4) + (elem.protein * 4) + (elem.fat * 9)
+//  console.log(calories)
+})
+console.log(foods)
 //////////////////////////////////PROBLEMS 2-4//////////////////////////////////
 /*
   For problems 2-4, you will be working with the products array below.
@@ -75,32 +79,42 @@ const products = [
 
 ////////////////////PROBLEM 2////////////////////
 /*
-  You've decided to have a sale on everything you have in stock. It's all going to be 25% off. 
-  Using the map method, make a copy of your products array with the prices reduced by 25%. 
+  You've decided to have a sale on everything you have in stock. It's all going to be 25% off.
+  Using the map method, make a copy of your products array with the prices reduced by 25%.
   Save the copy to a new variable called 'saleProducts'.
 */
 
 //CODE HERE
-
+let saleProducts = products.map(function(elem, i, arr){
+  elem.price = elem.price *(0.75);
+  return elem;
+})
+console.log(saleProducts)
 ////////////////////PROBLEM 3////////////////////
 /*
-  A customer has placed an order - they want one of every product that has blue on it. 
-  Using the filter method on saleProducts, return the products that have blue in their color array 
-  to a new variable called 'blueProducts'. 
+  A customer has placed an order - they want one of every product that has blue on it.
+  Using the filter method on saleProducts, return the products that have blue in their color array
+  to a new variable called 'blueProducts'.
   (Hint: look up the array method 'includes' on MDN)
 */
 
 //CODE HERE
-
+let blueProducts = saleProducts.filter(function(elem){
+  if (elem.color.includes('blue')){
+    return elem;
+  }
+})
 ////////////////////PROBLEM 4////////////////////
 /*
-  Now you'd like to get them their order total. 
-  Use the reduce method to add up the prices of the blueProducts. 
+  Now you'd like to get them their order total.
+  Use the reduce method to add up the prices of the blueProducts.
   Save the result to a variable called orderTotal.
 */
 
 //CODE HERE
-
+let orderTotal = blueProducts.reduce((acc, elem) => {
+  return acc + elem.price;
+}, 0)
 //////////////////////////////////PROBLEMS 5-8//////////////////////////////////
 /*
   For these problems we will be using the objects below, contactInfo and shippingInfo,
@@ -130,7 +144,7 @@ const shippingInfo = {
 */
 
 //CODE HERE
-
+let helensInfo = Object.assign({},contactInfo, shippingInfo);
 ////////////////////PROBLEM 6////////////////////
 /*
   Helen has a daughter named Ellen that lives at the same address.
@@ -139,22 +153,24 @@ const shippingInfo = {
 */
 
 //CODE HERE
-
+let ellensInfo = {...helensInfo};
+ellensInfo.name = "Ellen";
+ellensInfo.email = "ellen@email.com"
 ////////////////////PROBLEM 7////////////////////
-/* 
+/*
   Save Ellen's email to a new variable using destructuring.
 */
 
 //CODE HERE
-
+let {email} = ellensInfo;
 ////////////////////PROBLEM 8////////////////////
 /*
-  In a single expression (one line), save the zip code and state 
+  In a single expression (one line), save the zip code and state
   from shippingInfo to new variables using destructuring.
 */
 
 //CODE HERE
-
+let {zipCode, state} = shippingInfo;
 //////////////////////////////////PROBLEMS 9-11//////////////////////////////////
 /*
   Use the userInfo object below to complete problems 9-11.
@@ -210,13 +226,13 @@ const userInfo = {
 //DO EDIT CODE ABOVE
 
 ////////////////////PROBLEM 9////////////////////
-/* 
+/*
   Set the value of shouldAlert to the value of alerts in gn@rly_c0der_007's settings
   using dot notation.
 */
 
 //CODE HERE
-
+let shouldAlert = userInfo.settings.alerts;
 ////////////////////PROBLEM 10////////////////////
 /*
   Set the value of topic below to the last item in gn@rly_c0der_007's topics array
@@ -224,18 +240,18 @@ const userInfo = {
 */
 
 //CODE HERE
-
+let topic = userInfo.topics[3]
 ////////////////////PROBLEM 11////////////////////
 /*
-  Set the value of commenterId below to the userId of the first response to 
+  Set the value of commenterId below to the userId of the first response to
   gn@rly_c0der_007's 2nd comment using dot/bracket notation.
 */
 
 //CODE HERE
-
+let commenterId = userInfo.comments[1].responses[0].userId;
 ////////////////////PROBLEM 12////////////////////
 /*
-  Create an object called 'person' that has the following properties. 
+  Create an object called 'person' that has the following properties.
   Make sure you match the data types. You can choose the actual values.
       - name, string
       - age, number
@@ -251,16 +267,39 @@ const userInfo = {
 */
 
 //CODE HERE
-
+let person = {
+  name: "Django",
+  age: 34,
+  jobs: ['smelter', 'coder', 'bounty hunter'],
+  birthday: function(){
+    this.age += 1;
+  },
+  favorites: {
+    color: "purple",
+    number: 11,
+    book: "Wanted Posters",
+  },
+  kids: [
+      {
+      name: 'Jim',
+      age: 14,
+      },
+      {
+      name: 'ccoooooter',
+      age: 12,
+      }
+    ]
+}
+console.log(person.favorites.kids)
 //////////////////////////////////PROBLEMS 13-14//////////////////////////////////
 /*
-  For the last two problems, you will be determining the 
+  For the last two problems, you will be determining the
   context of 'this' in an object and function, respectively.
 */
 
 ////////////////////PROBLEM 13////////////////////
 /*
-  What is the context of 'this' in the workout object? 
+  What is the context of 'this' in the workout object?
   Uncomment the correct answer below.
 */
 
@@ -276,11 +315,11 @@ const workout = {
 //let context1 = myFunc
 //let context1 = window
 //let context1 = global
-// let context1 = workout
+let context1 = workout
 
 ////////////////////PROBLEM 14////////////////////
 /*
-  What is the context of 'this' in the myFunc function? 
+  What is the context of 'this' in the myFunc function?
   Uncomment the correct answer below.
 */
 
@@ -288,7 +327,7 @@ function myFunc() {
   return this
 }
 
-//let context2 = myFunc
-// let context2 = window
+// let context2 = myFunc
+let context2 = window
 //let context2 = global
 //let context2 = workout

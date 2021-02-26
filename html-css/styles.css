@@ -142,6 +142,7 @@ footer {
     font-size: 30px;
     display: flex;
     align-items: center;
+    padding-left: 15px;
 }
 
 img {
